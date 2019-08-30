@@ -1,0 +1,2 @@
+class SelectionError(Exception):
+    pass
