@@ -1,10 +1,23 @@
+from typing import Union
 from CustomError import SelectionError
 
 class Board(object):
     def __init__(self):
         self.__matrix = [[x + 1 + 3 * y for x in range(3)] for y in range(3)]
 
-    def get_winner(self):
+    @property
+    def board(self):
+        return self.__matrix
+
+    @staticmethod
+    def has_move_left(board):
+        for i in range(3):
+            for j in range(3):
+                if type(board[i][j]) == int:
+                    return True
+        return False
+
+    def get_winner(self) -> Union[int, None]:
         # Verifica linhas
         for i in self.__matrix:
             if i[0] == i[1] == i[2]:
@@ -19,18 +32,18 @@ class Board(object):
             return self.__matrix[1][1]
         return None
 
-    def move(self, symbol: str, field: int):
-        for j in range(3):
-            for i in range(3):
-                if i + 1 + 3 * j == field:
+    def move(self, symbol: str, field: int) -> None:
+        for y in range(3):
+            for x in range(3):
+                if x + 1 + 3 * y == field:
                     try:
-                        int(self.__matrix[i][j])
-                        self.__matrix[i][j] = symbol
+                        int(self.__matrix[y][x])
+                        self.__matrix[y][x] = symbol
                     except Exception:
                         print('Campo %d já selecionado' % field)
                         raise SelectionError
 
-    def print_out(self):
+    def print_out(self) -> None:
         for i in self.__matrix:
             print(*i, sep='\t|\t')
         print('\n')
