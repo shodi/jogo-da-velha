@@ -9,7 +9,8 @@ def main():
     print('Digite seu nome', end = '\n> ')
     player_name = input()
     players = [Player('X', player_name), Player('O', 'bot', True)]
-    turn = randint(0, 1)
+    # turn = randint(0, 1)
+    turn = 1
     while True:
         current_player = players[turn]
         # Não devemos imprimir o board para a jogada do bot

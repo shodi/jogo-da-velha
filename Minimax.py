@@ -25,9 +25,7 @@ def evaluate(board, symbol, opponent_symbol) -> int:
     
     return 0
 
-
-
-def minimax(board, players, depth, is_max):
+def minimax(board, players, depth, is_max, alpha, beta):
     opponent_symbol = None
     bot_symbol = None
     for player in players:
@@ -43,21 +41,25 @@ def minimax(board, players, depth, is_max):
     
     if not Board.has_move_left(board):
         return 0
-    
+
     for i in range(3):
         for j in range(3):
             if type(board[i][j]) == int:
                 prev_val = board[i][j]
                 if is_max:
                     best = -inf
+                    alpha = max(alpha, best)
                     board[i][j] = bot_symbol
                     fn = max
                 else:
                     best = inf
+                    beta = min(beta, best)
                     board[i][j] = opponent_symbol
                     fn = min
-                best = fn(best, minimax(board, players, depth + 1, not is_max))
+                best = fn(best, minimax(board, players, depth + 1, not is_max, alpha, beta))
                 board[i][j] = prev_val
+                if beta <= alpha:  
+                    break
     return best
                 
     

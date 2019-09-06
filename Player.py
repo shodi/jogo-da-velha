@@ -29,7 +29,7 @@ class Player(object):
                 if type(board[i][j]) == int:
                     prev_value = board[i][j]
                     board[i][j] = self.symbol
-                    move_val = minimax(board, players, 0, False)
+                    move_val = minimax(board, players, 0, False, -inf, inf)
                     board[i][j] = prev_value
 
                     if move_val > best_move:

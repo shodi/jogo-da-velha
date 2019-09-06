@@ -3,7 +3,8 @@ from CustomError import SelectionError
 
 class Board(object):
     def __init__(self):
-        self.__matrix = [[x + 1 + 3 * y for x in range(3)] for y in range(3)]
+        # self.__matrix = [[x + 1 + 3 * y for x in range(3)] for y in range(3)]
+        self.__matrix = [[1,2,'X'], [4,'X', 6], [7, 'O', 9]]
 
     @property
     def board(self):
